@@ -52,8 +52,21 @@ const updateDZO = asyncHandler(async (req, res) => {
 
 })
 
+const deleteDZO = asyncHandler(async (req, res) => {
+    try {
+        connection.query(`DELETE FROM coursework.DZO WHERE (idDetail = ${req.params.idDetail})`, (err, rows, fields) => {
+            if (err) throw err
+            res.status(200).json({message: rows})
+        })
+    } catch {
+        console.error(error);
+        res.status(500).send('Server error');
+    }
+})
+
 module.exports = {
     getDZO,
     getDZOByID,
-    updateDZO
+    updateDZO,
+    deleteDZO
 }

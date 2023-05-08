@@ -53,8 +53,21 @@ const updateTO = asyncHandler(async (req, res) => {
 
 })
 
+const deleteTO = asyncHandler(async (req, res) => {
+    try {
+        connection.query(`DELETE FROM coursework.TO WHERE (idTO = ${req.params.idTO})`, (err, rows, fields) => {
+            if (err) throw err
+            res.status(200).json({message: rows})
+        })
+    } catch {
+        console.error(error);
+        res.status(500).send('Server error');
+    }
+})
+
 module.exports = {
     getTO,
     getTOByID,
     updateTO,
+    deleteTO
 }

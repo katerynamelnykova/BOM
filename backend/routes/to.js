@@ -3,10 +3,11 @@ const router = express.Router()
 
 const { getTO, 
         getTOByID,
-        updateTO } = require('../controllers/to')
+        updateTO,
+        deleteTO } = require('../controllers/to')
 
 router.route("/").get(getTO)
 
-router.route("/:idTO").get(getTOByID).put(updateTO)
+router.route("/:idTO").get(getTOByID).put(updateTO).delete(deleteTO)
 
 module.exports = router;
