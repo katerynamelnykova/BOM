@@ -4,9 +4,10 @@ const router = express.Router()
 const { getTO, 
         getTOByID,
         updateTO,
-        deleteTO } = require('../controllers/to')
+        deleteTO,
+        createTO } = require('../controllers/to')
 
-router.route("/").get(getTO)
+router.route("/").get(getTO).post(createTO)
 
 router.route("/:idTO").get(getTOByID).put(updateTO).delete(deleteTO)
 

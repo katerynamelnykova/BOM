@@ -64,9 +64,31 @@ const deleteDZO = asyncHandler(async (req, res) => {
     }
 })
 
+const createDZO = asyncHandler(async (req, res) => {
+    try {
+        const idParentDetail = parseInt(req.body.idParentDetail) || null;
+        const amount = parseFloat(req.body.amount) || null;
+        const cost = parseFloat(req.body.cost) || null;
+        const weight = parseFloat(req.body.weight) || null;
+        const name = req.body.name || '';
+        const body_isManufactured = parseInt(req.body.isManufactured)
+        const isManufactured = body_isManufactured === 1 || body_isManufactured === 0 ? body_isManufactured : 0
+
+        connection.query(`INSERT INTO coursework.DZO (idParentDetail, amount, cost, weight, name, isManufactured) VALUES (${idParentDetail}, ${amount}, ${cost}, ${weight}, '${name}', ${isManufactured});`, (err, rows, fields) => {
+            if (err) throw err
+            res.status(200).json({message: rows})
+        })
+    } catch {
+        console.error(error);
+        res.status(500).send('Server error');
+    }
+
+})
+
 module.exports = {
     getDZO,
     getDZOByID,
     updateDZO,
-    deleteDZO
+    deleteDZO,
+    createDZO
 }
