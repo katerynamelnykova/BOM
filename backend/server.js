@@ -1,6 +1,10 @@
 const express = require('express')
-app = express()
+const bodyParser = require('body-parser');
 const port = process.env.PORT || 3000
+app = express()
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.get("/", function (req, res) {
     res.status(200).json({"message": "top directory"})
