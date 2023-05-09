@@ -5,8 +5,11 @@ const connection = require('../db')
 const getTO = asyncHandler(async (req, res) => {
     try {
         connection.query("SELECT * FROM coursework.TO", (err, rows, fields) => {
-            if (err) throw err
-            res.status(200).json({message: rows})
+            if (err) {
+                res.status(500).send('Server error');
+            } else {
+                res.status(200).json({message: rows})
+            }
         })
     } catch {
         console.error(error);
@@ -17,8 +20,11 @@ const getTO = asyncHandler(async (req, res) => {
 const getTOByID = asyncHandler(async (req, res) => {
     try {
         connection.query(`SELECT * FROM coursework.TO WHERE idTO=${req.params.idTO}`, (err, rows, fields) => {
-            if (err) throw err
-            res.status(200).json({message: rows})
+            if (err) {
+                res.status(500).send('Server error');
+            } else {
+                res.status(200).json({message: rows})
+            }
         })
     } catch {
         console.error(error);
@@ -30,7 +36,9 @@ const updateTO = asyncHandler(async (req, res) => {
     try {
         connection.query(`SELECT * FROM coursework.TO WHERE idTO=${req.params.idTO}`, 
         (err, rows, fields) => { 
-            if (err) throw err
+            if (err) {
+                res.status(500).send('Server error');
+            }
             const to = rows[0]
             const idManufacturedDetail = parseInt(req.body.idManufacturedDetail) || to.idManufacturedDetail;
             const sequenceNumber = parseInt(req.body.sequenceNumber) || to.sequenceNumber;
@@ -43,8 +51,11 @@ const updateTO = asyncHandler(async (req, res) => {
             const name = req.body.name || to.name;
 
             connection.query(`UPDATE coursework.TO SET idManufacturedDetail = ${idManufacturedDetail}, sequenceNumber = ${sequenceNumber}, district = '${district}', duration = '${duration}', department = '${department}', equipmentTimeCost = '${equipmentTimeCost}', workerTimeCost = '${workerTimeCost}', cost = '${cost}', name = '${name}' WHERE (idTO = ${req.params.idTO});`, (err, rows, fields) => {
-                if (err) throw err
-                res.status(200).json({message: rows})
+                if (err) {
+                    res.status(500).send('Server error');
+                } else {
+                    res.status(200).json({message: rows})
+                }
             })
         })
     } catch {
@@ -57,8 +68,11 @@ const updateTO = asyncHandler(async (req, res) => {
 const deleteTO = asyncHandler(async (req, res) => {
     try {
         connection.query(`DELETE FROM coursework.TO WHERE (idTO = ${req.params.idTO})`, (err, rows, fields) => {
-            if (err) throw err
-            res.status(200).json({message: rows})
+            if (err) {
+                res.status(500).send('Server error');
+            } else {
+                res.status(200).json({message: rows})
+            }
         })
     } catch {
         console.error(error);
@@ -79,8 +93,11 @@ const createTO = asyncHandler(async (req, res) => {
         const name = req.body.name || '';
 
         connection.query(`INSERT INTO coursework.TO (idManufacturedDetail, sequenceNumber, duration, district, department, equipmentTimeCost, workerTimeCost, cost, name) VALUES (${idManufacturedDetail}, ${sequenceNumber}, ${duration}, '${district}', '${department}', ${equipmentTimeCost}, ${workerTimeCost}, ${cost}, '${name}');`, (err, rows, fields) => {
-            if (err) throw err
-            res.status(200).json({message: rows})
+            if (err) {
+                res.status(500).send('Server error');
+            } else {
+                res.status(200).json({message: rows})
+            }
         })
     } catch {
         console.error(error);

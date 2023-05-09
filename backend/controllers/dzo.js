@@ -5,8 +5,11 @@ const connection = require('../db')
 const getDZO = asyncHandler(async (req, res) => {
     try {
         connection.query("SELECT * FROM coursework.DZO", (err, rows, fields) => {
-            if (err) throw err
-            res.status(200).json({message: rows})
+            if (err) {
+                res.status(500).send('Server error');
+            } else {
+                res.status(200).json({message: rows})
+            }
         })
     } catch {
         console.error(error);
@@ -17,8 +20,11 @@ const getDZO = asyncHandler(async (req, res) => {
 const getDZOByID = asyncHandler(async (req, res) => {
     try {
         connection.query(`SELECT * FROM coursework.DZO WHERE idDetail=${req.params.idDetail}`, (err, rows, fields) => {
-            if (err) throw err
-            res.status(200).json({message: rows})
+            if (err) {
+                res.status(500).send('Server error');
+            } else {
+                res.status(200).json({message: rows})
+            }
         })
     } catch {
         console.error(error);
@@ -30,7 +36,9 @@ const updateDZO = asyncHandler(async (req, res) => {
     try {
         connection.query(`SELECT * FROM coursework.DZO WHERE idDetail=${req.params.idDetail}`, 
         (err, rows, fields) => { 
-            if (err) throw err
+            if (err) {
+                res.status(500).send('Server error');
+            }
             const dzo = rows[0]
             const idParentDetail = parseInt(req.body.idParentDetail) || dzo.idParentDetail;
             const amount = parseFloat(req.body.amount) || dzo.amount;
@@ -41,8 +49,11 @@ const updateDZO = asyncHandler(async (req, res) => {
             const isManufactured = body_isManufactured === 1 || body_isManufactured === 0 ? body_isManufactured : dzo.isManufactured
 
             connection.query(`UPDATE coursework.DZO SET idParentDetail = ${idParentDetail}, amount = ${amount}, cost = ${cost}, weight = ${weight}, name = '${name}', isManufactured = ${isManufactured}  WHERE (idDetail = ${req.params.idDetail});`, (err, rows, fields) => {
-                if (err) throw err
-                res.status(200).json({message: rows})
+                if (err) {
+                    res.status(500).send('Server error');
+                } else {
+                    res.status(200).json({message: rows})
+                }
             })
         })
     } catch {
@@ -55,8 +66,11 @@ const updateDZO = asyncHandler(async (req, res) => {
 const deleteDZO = asyncHandler(async (req, res) => {
     try {
         connection.query(`DELETE FROM coursework.DZO WHERE (idDetail = ${req.params.idDetail})`, (err, rows, fields) => {
-            if (err) throw err
-            res.status(200).json({message: rows})
+            if (err) {
+                res.status(500).send('Server error');
+            } else {
+                res.status(200).json({message: rows})
+            }
         })
     } catch {
         console.error(error);
@@ -75,8 +89,11 @@ const createDZO = asyncHandler(async (req, res) => {
         const isManufactured = body_isManufactured === 1 || body_isManufactured === 0 ? body_isManufactured : 0
 
         connection.query(`INSERT INTO coursework.DZO (idParentDetail, amount, cost, weight, name, isManufactured) VALUES (${idParentDetail}, ${amount}, ${cost}, ${weight}, '${name}', ${isManufactured});`, (err, rows, fields) => {
-            if (err) throw err
-            res.status(200).json({message: rows})
+            if (err) {
+                res.status(500).send('Server error');
+            } else {
+                res.status(200).json({message: rows})
+            }
         })
     } catch {
         console.error(error);
