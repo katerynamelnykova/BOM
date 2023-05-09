@@ -5,8 +5,6 @@ export default createStore({
   state: {
     dzos: [],
     tos: [],
-    dzo: {},
-    to: {}
   },
   getters: {
   },
@@ -16,12 +14,6 @@ export default createStore({
     },
     SET_TOS(state, tos) {
         state.tos = tos
-    },
-    SET_DZO(state, dzo) {
-      state.dzo = dzo
-    },
-    SET_TO(state, to) {
-        state.to = to
     },
     DELETE_DZO(state) {
         state.dzo = {}
@@ -71,6 +63,20 @@ export default createStore({
       await axios.put(`/api/dzo/${idDetail}`, 
       {idParentDetail: idParentDetail, cost: cost, weight: weight, name: name, isManufactured: isManufactured})
       dispatch("fetchDZOs")
+    },
+    async addTO({ dispatch }, { idManufacturedDetail, sequenceNumber, duration, district, department, equipmentTimeCost, workerTimeCost, cost, name }) {
+      await axios.post(`/api/to`, { idManufacturedDetail: idManufacturedDetail, sequenceNumber: sequenceNumber, 
+        duration: duration, district: district, department: department, 
+        equipmentTimeCost: equipmentTimeCost, workerTimeCost: workerTimeCost, 
+        cost: cost, name: name })
+      dispatch("fetchTOs")
+    },
+    async editTO({ dispatch }, { idTO, idManufacturedDetail, sequenceNumber, duration, district, department, equipmentTimeCost, workerTimeCost, cost, name }) {
+      await axios.put(`/api/to/${idTO}`, { idManufacturedDetail: idManufacturedDetail, sequenceNumber: sequenceNumber, 
+        duration: duration, district: district, department: department, 
+        equipmentTimeCost: equipmentTimeCost, workerTimeCost: workerTimeCost, 
+        cost: cost, name: name })
+      dispatch("fetchTOs")
     },
   },
   modules: {

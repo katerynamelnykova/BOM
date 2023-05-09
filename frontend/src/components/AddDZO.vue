@@ -14,7 +14,7 @@
     <input type="float" class="form-control col" id="weight" name="weight">
   </div>
   <div class="form-group my-2 row">
-    <label for="name" class="form-label col">Name:</label>
+    <label for="name" class="form-label col">Name:<span class="text-danger">*</span></label>
     <input type="text" class="form-control col" id="name" name="name" required>
   </div>
   <div class="form-group my-2 row">

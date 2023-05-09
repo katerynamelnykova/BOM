@@ -2,7 +2,7 @@
 <form class='edit-dzo-form' @submit.prevent="onSubmit">
   <p class="h4 my-3 d-flex align-items-center justify-content-center">Змінити ДЗО:</p>
   <div class="form-group my-1 row">
-    <label for="idDetail" class="form-label col">ID Detail:</label>
+    <label for="idDetail" class="form-label col">ID Detail: <span class="text-danger">*</span></label>
     <input type="number" class="form-control col" id="idDetail" name="idDetail" required>
   </div>
   <div class="form-group my-1 row">
@@ -48,7 +48,6 @@ export default {
         const weight = e.target.weight.value ? parseFloat(e.target.weight.value) : null
         const name = e.target.name.value || null
         const isManufactured = parseInt(e.target.isManufactured.value)
-        console.log(idDetail, idParentDetail, cost, weight, name, isManufactured)
         
         this.$store.dispatch("editDZO", { idDetail, idParentDetail, cost, weight, name, isManufactured })
         this.$router.go(0)
