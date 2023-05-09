@@ -4,6 +4,14 @@
         <div class="row">
             <div class="col-md-8 mx-auto text-left mt-4">
                 <p class="h2">Деталі або зборочні одиниці:</p>
+                <div class='row form-dzo'>
+                    <div class="col">
+                        <AddDZO />
+                    </div>
+                    <div class='col'>
+                        <EditDZO />
+                    </div>
+                </div>
                 <table class="table table-sm table-dark mt-4">
                 <thead>
                     <tr>
@@ -39,9 +47,14 @@
 </template>
 
 <script>
+import AddDZO from '../components/AddDZO.vue'
+import EditDZO from '../components/EditDZO.vue'
+
 export default {
   name: 'DZOView',
   components: {
+    AddDZO,
+    EditDZO
   },
   methods: {
     async deleteDZO(id) {
@@ -61,5 +74,15 @@ export default {
     background: transparent;
     border-color: transparent;
     color: white;
+}
+</style>
+
+<style scoped>
+.form-dzo {
+    border: 1px solid black;
+    border-radius: 10px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    padding-left: 15px;
 }
 </style>
