@@ -17,6 +17,7 @@
                     <th scope="col">workerTimeCost</th>
                     <th scope="col">cost</th>
                     <th scope="col">name</th>
+                    <th scope="col"> </th>
                     </tr>
                 </thead>
                 <tbody>  
@@ -31,6 +32,11 @@
                         <td>{{ to.workerTimeCost }}</td>
                         <td>{{ to.cost }}</td>
                         <td>{{ to.name }}</td>
+                        <td>
+                            <button class="bin-button" @click="deleteTO(to.idTO)">
+                                <span class="material-symbols-outlined">delete</span>
+                            </button>
+                        </td>
                     </tr>
                 </tbody>
                 </table>
@@ -44,6 +50,13 @@
 export default {
   name: 'TOView',
   components: {
+  },
+  methods: {
+    async deleteTO(id) {
+        this.$store.dispatch('deleteTO', id).then(() => {
+        this.$router.go(0)
+        })
+    },
   },
   created() {
     this.$store.dispatch("fetchTOs")

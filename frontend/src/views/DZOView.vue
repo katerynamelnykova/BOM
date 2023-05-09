@@ -13,6 +13,7 @@
                     <th scope="col">weight</th>
                     <th scope="col">name</th>
                     <th scope="col">isManufactured</th>
+                    <th> </th>
                     </tr>
                 </thead>
                 <tbody>  
@@ -23,6 +24,11 @@
                         <td>{{ dzo.weight }}</td>
                         <td>{{ dzo.name }}</td>
                         <td>{{ dzo.isManufactured }}</td>
+                        <td>
+                            <button class="bin-button" @click="deleteDZO(dzo.idDetail)">
+                                <span class="material-symbols-outlined">delete</span>
+                            </button>
+                        </td>
                     </tr>
                 </tbody>
                 </table>
@@ -37,8 +43,23 @@ export default {
   name: 'DZOView',
   components: {
   },
+  methods: {
+    async deleteDZO(id) {
+        this.$store.dispatch('deleteDZO', id).then(() => {
+        this.$router.go(0)
+        })
+    },
+  },
   created() {
     this.$store.dispatch("fetchDZOs")
   }
 }
 </script>
+
+<style>
+.bin-button {
+    background: transparent;
+    border-color: transparent;
+    color: white;
+}
+</style>

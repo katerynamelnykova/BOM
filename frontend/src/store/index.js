@@ -47,6 +47,22 @@ export default createStore({
         console.log(error)
       }
     },
+    async deleteDZO({ commit }, id) {
+      if (confirm('Ви впевнені, що хочете назавжди видалити цей запис?')) {
+          await fetch(`/api/dzo/${id}`, {
+              method: 'DELETE'
+          })
+          commit("DELETE_DZO")
+      }
+    },
+    async deleteTO({ commit }, id) {
+      if (confirm('Ви впевнені, що хочете назавжди видалити цей запис?')) {
+          await fetch(`/api/to/${id}`, {
+              method: 'DELETE'
+          })
+          commit("DELETE_TO")
+      }
+    }
   },
   modules: {
   }

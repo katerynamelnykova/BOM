@@ -18,6 +18,7 @@ export default {
 
 <style>
 @import url("https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css");
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0");
 
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
