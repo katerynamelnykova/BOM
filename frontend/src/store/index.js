@@ -62,7 +62,16 @@ export default createStore({
           })
           commit("DELETE_TO")
       }
-    }
+    },
+    async addDZO({ dispatch }, { idParentDetail, cost, weight, name, isManufactured }) {
+      await axios.post(`/api/dzo`, { idParentDetail: idParentDetail, cost: cost, weight: weight, name: name, isManufactured: isManufactured })
+      dispatch("fetchDZOs")
+    },
+    async editDZO({ dispatch }, {idDetail, idParentDetail, cost, weight, name, isManufactured}) {
+      await axios.put(`/api/dzo/${idDetail}`, 
+      {idParentDetail: idParentDetail, cost: cost, weight: weight, name: name, isManufactured: isManufactured})
+      dispatch("fetchDZOs")
+    },
   },
   modules: {
   }

@@ -16,7 +16,7 @@
                 </router-link>
                 </div>
                 <div class="col-4">
-                <router-link to='/to' class="btn btn-secondary btn-lg my-4" href="#">
+                <router-link to='/to' class="btn btn-secondary btn-lg my-4">
                   Технологічні операції
                 </router-link>
                 </div>

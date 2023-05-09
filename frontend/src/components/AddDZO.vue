@@ -1,5 +1,5 @@
 <template>
-<form class='add-dzo-form'>
+<form class='add-dzo-form' @submit.prevent="onSubmit">
   <p class="h4 my-4 mb-4 d-flex align-items-center justify-content-center">Додати ДЗО:</p>
   <div class="form-group my-2 row">
     <label for="idParentDetail" class="form-label col">ID Parent Detail:</label>
@@ -7,11 +7,11 @@
   </div>
   <div class="form-group my-2 row">
     <label for="cost" class="form-label col">Cost:</label>
-    <input type="number" class="form-control col" id="cost" name="cost">
+    <input type="float" class="form-control col" id="cost" name="cost">
   </div>
   <div class="form-group my-2 row">
     <label for="weight" class="form-label col">Weight:</label>
-    <input type="number" class="form-control col" id="weight" name="weight">
+    <input type="float" class="form-control col" id="weight" name="weight">
   </div>
   <div class="form-group my-2 row">
     <label for="name" class="form-label col">Name:</label>
@@ -34,6 +34,19 @@
 export default {
   name: 'AddDZO',
   components: {
+  },
+  methods: {
+    async onSubmit(e) {
+        e.preventDefault()
+        const idParentDetail = e.target.idParentDetail.value ? parseInt(e.target.idParentDetail.value) : null
+        const cost = e.target.cost.value ? parseFloat(e.target.cost.value) : null
+        const weight = e.target.weight.value ? parseFloat(e.target.weight.value) : null
+        const name = e.target.name.value
+        const isManufactured = parseInt(e.target.isManufactured.value)
+
+        this.$store.dispatch("addDZO", { idParentDetail, cost, weight, name, isManufactured })
+        this.$router.go(0)
+    }
   },
 }
 </script>
