@@ -50,8 +50,9 @@ const updateTO = asyncHandler(async (req, res) => {
             const workerTimeCost = parseFloat(req.body.workerTimeCost) || to.workerTimeCost;
             const name = req.body.name || to.name;
 
-            connection.query(`UPDATE coursework.TO SET idManufacturedDetail = ${idManufacturedDetail}, sequenceNumber = ${sequenceNumber}, district = '${district}', duration = '${duration}', department = '${department}', equipmentTimeCost = '${equipmentTimeCost}', workerTimeCost = '${workerTimeCost}', cost = '${cost}', name = '${name}' WHERE (idTO = ${req.params.idTO});`, (err, rows, fields) => {
+            connection.query(`UPDATE coursework.TO SET idManufacturedDetail = ${idManufacturedDetail}, sequenceNumber = ${sequenceNumber}, district = '${district}', duration = ${duration}, department = '${department}', equipmentTimeCost = ${equipmentTimeCost}, workerTimeCost = ${workerTimeCost}, cost = ${cost}, name = '${name}' WHERE (idTO = ${req.params.idTO});`, (err, rows, fields) => {
                 if (err) {
+                    console.log(err)
                     res.status(500).send('Server error');
                 } else {
                     res.status(200).json({message: rows})
