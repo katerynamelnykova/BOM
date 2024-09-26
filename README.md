@@ -5,7 +5,20 @@ This repository contains a collection of Bill of Materials (BOM) data and tools 
 
 ## Getting Started
 ### Installation and Running
-1. Clone the repository using Git: git clone https://github.com/katerynamelnykova/BOM.git
-2. Install dependencies: npm install
-3. Run the backend: npm start
-4. Run the frontend: npm serve
+1. Clone the repository using Git:
+
+```
+git clone https://github.com/katerynamelnykova/BOM.git
+```
+2. Install dependencies:
+```
+npm install
+```
+3. Run the backend:
+```
+npm start
+```
+4. Run the frontend:
+```
+npm serve
+```
